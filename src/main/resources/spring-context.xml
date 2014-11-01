@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd">
+    
+    <bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="locations">
+            <list>
+                <value>classpath:/soap-server.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <jaxws:client id="actorService"
+		serviceClass="fr.rbillard.soap_server.ws.ActorWebService" 
+		address="${soap-server.address}/actor" username="${soap-server.username}" password="${soap-server.password}" />
+    
+</beans>
