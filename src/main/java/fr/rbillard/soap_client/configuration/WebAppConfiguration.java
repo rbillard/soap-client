@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "fr.rbillard.soap_client.controller" })
+@ComponentScan(basePackages = { "fr.rbillard.soap_client" })
 @ImportResource("classpath:/spring-context.xml")
 public class WebAppConfiguration extends WebMvcConfigurerAdapter {
 

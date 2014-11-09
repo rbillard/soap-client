@@ -1,0 +1,738 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.soap_server.rbillard.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CinemaWebService" targetNamespace="http://ws.soap_server.rbillard.fr/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.soap_server.rbillard.fr/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws.soap_server.rbillard.fr/">
+  <xs:element name="createActor" type="tns:createActor"/>
+  <xs:element name="createActorResponse" type="tns:createActorResponse"/>
+  <xs:element name="createMovie" type="tns:createMovie"/>
+  <xs:element name="createMovieResponse" type="tns:createMovieResponse"/>
+  <xs:element name="createRole" type="tns:createRole"/>
+  <xs:element name="createRoleResponse" type="tns:createRoleResponse"/>
+  <xs:element name="deleteActor" type="tns:deleteActor"/>
+  <xs:element name="deleteActorResponse" type="tns:deleteActorResponse"/>
+  <xs:element name="deleteMovie" type="tns:deleteMovie"/>
+  <xs:element name="deleteMovieResponse" type="tns:deleteMovieResponse"/>
+  <xs:element name="deleteRole" type="tns:deleteRole"/>
+  <xs:element name="deleteRoleResponse" type="tns:deleteRoleResponse"/>
+  <xs:element name="findActors" type="tns:findActors"/>
+  <xs:element name="findActorsResponse" type="tns:findActorsResponse"/>
+  <xs:element name="findAllActors" type="tns:findAllActors"/>
+  <xs:element name="findAllActorsResponse" type="tns:findAllActorsResponse"/>
+  <xs:element name="findAllMovies" type="tns:findAllMovies"/>
+  <xs:element name="findAllMoviesResponse" type="tns:findAllMoviesResponse"/>
+  <xs:element name="findAllRoles" type="tns:findAllRoles"/>
+  <xs:element name="findAllRolesResponse" type="tns:findAllRolesResponse"/>
+  <xs:element name="findMovies" type="tns:findMovies"/>
+  <xs:element name="findMoviesResponse" type="tns:findMoviesResponse"/>
+  <xs:element name="findOneActor" type="tns:findOneActor"/>
+  <xs:element name="findOneActorResponse" type="tns:findOneActorResponse"/>
+  <xs:element name="findOneMovie" type="tns:findOneMovie"/>
+  <xs:element name="findOneMovieResponse" type="tns:findOneMovieResponse"/>
+  <xs:element name="findOneRole" type="tns:findOneRole"/>
+  <xs:element name="findOneRoleResponse" type="tns:findOneRoleResponse"/>
+  <xs:element name="updateActor" type="tns:updateActor"/>
+  <xs:element name="updateActorResponse" type="tns:updateActorResponse"/>
+  <xs:element name="updateMovie" type="tns:updateMovie"/>
+  <xs:element name="updateMovieResponse" type="tns:updateMovieResponse"/>
+  <xs:element name="updateRole" type="tns:updateRole"/>
+  <xs:element name="updateRoleResponse" type="tns:updateRoleResponse"/>
+  <xs:complexType name="createActor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="birthDate" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createActorResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:actorDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actorDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="birthDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="roles">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="role" type="tns:roleDTO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="roleDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="actor" type="tns:actorDTO"/>
+      <xs:element minOccurs="0" name="movie" type="tns:movieDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="movieDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="roles">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="role" type="tns:roleDTO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteActor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteActorResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="findAllActors">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="findAllActorsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:actorDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findAllRoles">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="findAllRolesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:roleDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findOneMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findOneMovieResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:movieDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateMovieResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:movieDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findAllMovies">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="findAllMoviesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:movieDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findOneRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findOneRoleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:roleDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateActor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="birthDate" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateActorResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:actorDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findActors">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findActorsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:actorDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteRoleResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="findOneActor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findOneActorResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:actorDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="actorId" type="xs:long"/>
+      <xs:element minOccurs="0" name="movieId" type="xs:long"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createRoleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:roleDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteMovieResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="updateRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="roleId" type="xs:long"/>
+      <xs:element minOccurs="0" name="actorId" type="xs:long"/>
+      <xs:element minOccurs="0" name="movieId" type="xs:long"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateRoleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:roleDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findMovies">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findMoviesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:movieDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createMovieResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:movieDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MovieNotFoundException" type="tns:MovieNotFoundException"/>
+  <xs:complexType name="MovieNotFoundException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="movieId" type="xs:long"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoleNotFoundException" type="tns:RoleNotFoundException"/>
+  <xs:complexType name="RoleNotFoundException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="roleId" type="xs:long"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActorNotFoundException" type="tns:ActorNotFoundException"/>
+  <xs:complexType name="ActorNotFoundException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="actorId" type="xs:long"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createActor">
+    <wsdl:part element="tns:createActor" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteActor">
+    <wsdl:part element="tns:deleteActor" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRoleResponse">
+    <wsdl:part element="tns:createRoleResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllActors">
+    <wsdl:part element="tns:findAllActors" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createActorResponse">
+    <wsdl:part element="tns:createActorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMovie">
+    <wsdl:part element="tns:updateMovie" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllMovies">
+    <wsdl:part element="tns:findAllMovies" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateActorResponse">
+    <wsdl:part element="tns:updateActorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllActorsResponse">
+    <wsdl:part element="tns:findAllActorsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteMovieResponse">
+    <wsdl:part element="tns:deleteMovieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MovieNotFoundException">
+    <wsdl:part element="tns:MovieNotFoundException" name="MovieNotFoundException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findActors">
+    <wsdl:part element="tns:findActors" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createMovieResponse">
+    <wsdl:part element="tns:createMovieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRole">
+    <wsdl:part element="tns:deleteRole" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findOneActor">
+    <wsdl:part element="tns:findOneActor" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRoleResponse">
+    <wsdl:part element="tns:updateRoleResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteMovie">
+    <wsdl:part element="tns:deleteMovie" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findOneRoleResponse">
+    <wsdl:part element="tns:findOneRoleResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findMovies">
+    <wsdl:part element="tns:findMovies" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ActorNotFoundException">
+    <wsdl:part element="tns:ActorNotFoundException" name="ActorNotFoundException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllRoles">
+    <wsdl:part element="tns:findAllRoles" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findOneMovieResponse">
+    <wsdl:part element="tns:findOneMovieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findOneMovie">
+    <wsdl:part element="tns:findOneMovie" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllMoviesResponse">
+    <wsdl:part element="tns:findAllMoviesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteActorResponse">
+    <wsdl:part element="tns:deleteActorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findMoviesResponse">
+    <wsdl:part element="tns:findMoviesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findOneRole">
+    <wsdl:part element="tns:findOneRole" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateActor">
+    <wsdl:part element="tns:updateActor" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findActorsResponse">
+    <wsdl:part element="tns:findActorsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRoleResponse">
+    <wsdl:part element="tns:deleteRoleResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RoleNotFoundException">
+    <wsdl:part element="tns:RoleNotFoundException" name="RoleNotFoundException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRole">
+    <wsdl:part element="tns:createRole" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findOneActorResponse">
+    <wsdl:part element="tns:findOneActorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRole">
+    <wsdl:part element="tns:updateRole" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllRolesResponse">
+    <wsdl:part element="tns:findAllRolesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMovieResponse">
+    <wsdl:part element="tns:updateMovieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createMovie">
+    <wsdl:part element="tns:createMovie" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CinemaWebService">
+    <wsdl:operation name="createActor">
+      <wsdl:input message="tns:createActor" name="createActor">
+    </wsdl:input>
+      <wsdl:output message="tns:createActorResponse" name="createActorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteActor">
+      <wsdl:input message="tns:deleteActor" name="deleteActor">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteActorResponse" name="deleteActorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllActors">
+      <wsdl:input message="tns:findAllActors" name="findAllActors">
+    </wsdl:input>
+      <wsdl:output message="tns:findAllActorsResponse" name="findAllActorsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllRoles">
+      <wsdl:input message="tns:findAllRoles" name="findAllRoles">
+    </wsdl:input>
+      <wsdl:output message="tns:findAllRolesResponse" name="findAllRolesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findOneMovie">
+      <wsdl:input message="tns:findOneMovie" name="findOneMovie">
+    </wsdl:input>
+      <wsdl:output message="tns:findOneMovieResponse" name="findOneMovieResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:MovieNotFoundException" name="MovieNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateMovie">
+      <wsdl:input message="tns:updateMovie" name="updateMovie">
+    </wsdl:input>
+      <wsdl:output message="tns:updateMovieResponse" name="updateMovieResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:MovieNotFoundException" name="MovieNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllMovies">
+      <wsdl:input message="tns:findAllMovies" name="findAllMovies">
+    </wsdl:input>
+      <wsdl:output message="tns:findAllMoviesResponse" name="findAllMoviesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findOneRole">
+      <wsdl:input message="tns:findOneRole" name="findOneRole">
+    </wsdl:input>
+      <wsdl:output message="tns:findOneRoleResponse" name="findOneRoleResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:RoleNotFoundException" name="RoleNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateActor">
+      <wsdl:input message="tns:updateActor" name="updateActor">
+    </wsdl:input>
+      <wsdl:output message="tns:updateActorResponse" name="updateActorResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ActorNotFoundException" name="ActorNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findActors">
+      <wsdl:input message="tns:findActors" name="findActors">
+    </wsdl:input>
+      <wsdl:output message="tns:findActorsResponse" name="findActorsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRole">
+      <wsdl:input message="tns:deleteRole" name="deleteRole">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteRoleResponse" name="deleteRoleResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:RoleNotFoundException" name="RoleNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findOneActor">
+      <wsdl:input message="tns:findOneActor" name="findOneActor">
+    </wsdl:input>
+      <wsdl:output message="tns:findOneActorResponse" name="findOneActorResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ActorNotFoundException" name="ActorNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createRole">
+      <wsdl:input message="tns:createRole" name="createRole">
+    </wsdl:input>
+      <wsdl:output message="tns:createRoleResponse" name="createRoleResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ActorNotFoundException" name="ActorNotFoundException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:MovieNotFoundException" name="MovieNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteMovie">
+      <wsdl:input message="tns:deleteMovie" name="deleteMovie">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteMovieResponse" name="deleteMovieResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRole">
+      <wsdl:input message="tns:updateRole" name="updateRole">
+    </wsdl:input>
+      <wsdl:output message="tns:updateRoleResponse" name="updateRoleResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:RoleNotFoundException" name="RoleNotFoundException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:ActorNotFoundException" name="ActorNotFoundException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:MovieNotFoundException" name="MovieNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findMovies">
+      <wsdl:input message="tns:findMovies" name="findMovies">
+    </wsdl:input>
+      <wsdl:output message="tns:findMoviesResponse" name="findMoviesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMovie">
+      <wsdl:input message="tns:createMovie" name="createMovie">
+    </wsdl:input>
+      <wsdl:output message="tns:createMovieResponse" name="createMovieResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CinemaWebServiceSoapBinding" type="tns:CinemaWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createActor">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createActor">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createActorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteActor">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteActor">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteActorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllActors">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllActors">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllActorsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllRoles">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllRoles">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllRolesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findOneMovie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findOneMovie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findOneMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="MovieNotFoundException">
+        <soap:fault name="MovieNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateMovie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateMovie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="MovieNotFoundException">
+        <soap:fault name="MovieNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllMovies">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllMovies">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllMoviesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findOneRole">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findOneRole">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findOneRoleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RoleNotFoundException">
+        <soap:fault name="RoleNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateActor">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateActor">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateActorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ActorNotFoundException">
+        <soap:fault name="ActorNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findActors">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findActors">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findActorsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRole">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteRole">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteRoleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RoleNotFoundException">
+        <soap:fault name="RoleNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findOneActor">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findOneActor">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findOneActorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ActorNotFoundException">
+        <soap:fault name="ActorNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createRole">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createRole">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createRoleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ActorNotFoundException">
+        <soap:fault name="ActorNotFoundException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="MovieNotFoundException">
+        <soap:fault name="MovieNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteMovie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteMovie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRole">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateRole">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateRoleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RoleNotFoundException">
+        <soap:fault name="RoleNotFoundException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="ActorNotFoundException">
+        <soap:fault name="ActorNotFoundException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="MovieNotFoundException">
+        <soap:fault name="MovieNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findMovies">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findMovies">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findMoviesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMovie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createMovie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CinemaWebService">
+    <wsdl:port binding="tns:CinemaWebServiceSoapBinding" name="CinemaWebServicePort">
+      <soap:address location="http://localhost:8080/soap-server/services/cinema"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

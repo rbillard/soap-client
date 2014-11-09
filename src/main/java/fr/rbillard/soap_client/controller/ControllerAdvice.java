@@ -4,12 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.WebServiceException;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.rbillard.soap_server.ws.ActorNotFoundException_Exception;
+import fr.rbillard.soap_server.ws.MovieNotFoundException_Exception;
+import fr.rbillard.soap_server.ws.RoleNotFoundException_Exception;
 
 @org.springframework.web.bind.annotation.ControllerAdvice
 public class ControllerAdvice {
@@ -35,20 +36,34 @@ public class ControllerAdvice {
 	@ExceptionHandler( ActorNotFoundException_Exception.class )
 	public ModelAndView handleActorNotFoundException( ActorNotFoundException_Exception e ) {
 		
-		ModelAndView modelAndView = newModelAndView( "actor/actor-not-found", "Actor not found" );
-		modelAndView.addObject( "actorId", e.getFaultInfo().getActorId() );
+		ModelAndView modelAndView = newModelAndView( "error/not-found", "Actor not found" );
+		modelAndView.addObject( "id", e.getFaultInfo().getActorId() );
+		modelAndView.addObject( "type", "actor" );
 		
 		return modelAndView;
 		
 	}
 	
-	@ExceptionHandler( HttpRequestMethodNotSupportedException.class )
-	public ModelAndView handleHttpRequestMethodNotSupportedException() {
+	@ExceptionHandler( MovieNotFoundException_Exception.class )
+	public ModelAndView handleMovieNotFoundException( MovieNotFoundException_Exception e ) {
 		
-		ModelAndView modelAndView = newModelAndView( "error/404", "Page not found" );
+		ModelAndView modelAndView = newModelAndView( "error/not-found", "Movie not found" );
+		modelAndView.addObject( "id", e.getFaultInfo().getMovieId() );
+		modelAndView.addObject( "type", "movie" );
 		
 		return modelAndView;
-
+		
+	}
+	
+	@ExceptionHandler( RoleNotFoundException_Exception.class )
+	public ModelAndView handleRoleNotFoundException( RoleNotFoundException_Exception e ) {
+		
+		ModelAndView modelAndView = newModelAndView( "error/not-found", "Role not found" );
+		modelAndView.addObject( "id", e.getFaultInfo().getRoleId() );
+		modelAndView.addObject( "type", "movie" );
+		
+		return modelAndView;
+		
 	}
 	
 	@ExceptionHandler( Exception.class )

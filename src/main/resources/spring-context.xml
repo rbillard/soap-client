@@ -15,8 +15,8 @@
         </property>
     </bean>
     
-    <jaxws:client id="actorService"
-		serviceClass="fr.rbillard.soap_server.ws.ActorWebService" 
-		address="${soap-server.address}/actor" username="${soap-server.username}" password="${soap-server.password}" />
-    
+    <jaxws:client id="cinemaService"
+		serviceClass="fr.rbillard.soap_server.ws.CinemaWebService" 
+		address="${soap-server.address}/cinema" username="${soap-server.username}" password="${soap-server.password}" />
+
 </beans>

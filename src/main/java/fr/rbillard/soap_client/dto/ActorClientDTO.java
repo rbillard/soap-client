@@ -1,13 +1,14 @@
-package fr.rbillard.soap_client.form;
+package fr.rbillard.soap_client.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class ActorForm {
+public class ActorClientDTO {
 
 	private Long id;
 	
@@ -21,6 +22,7 @@ public class ActorForm {
 	@DateTimeFormat( pattern = "yyyy-MM-dd" )
 	private Date birthDate;
 	
+	private List<RoleClientDTO> roles;
 	
 	public Long getId() {
 		return id;
@@ -53,5 +55,17 @@ public class ActorForm {
 		this.birthDate = birthDate;
 	}
 	
+	
+	public List<RoleClientDTO> getRoles() {
+		return roles;
+	}
+	public void setRoles( List<RoleClientDTO> roles ) {
+		this.roles = roles;
+	}
+	
+	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 	
 }

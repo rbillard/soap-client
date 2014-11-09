@@ -3,6 +3,6 @@
 
 <t:genericpage>
     <jsp:body>
-        <p>Unexisting actor with the id ${ actorId }.</p>
+        <p>Unexisting ${ type } with the id ${ id }.</p>
     </jsp:body>
 </t:genericpage>

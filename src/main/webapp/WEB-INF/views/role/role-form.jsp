@@ -5,11 +5,11 @@
 <t:genericpage>
     <jsp:body>
     
-    	<form:form modelAttribute="actor" method="POST" action="/${ context }/actor/" cssClass="form-horizontal">
+    	<form:form modelAttribute="role" method="POST" action="/${ context }/role/" cssClass="form-horizontal">
     	
    			<form:hidden path="id" />
-    		
-    		<div class="form-group">
+   			
+   			<div class="form-group">
     			<form:label path="firstName" cssClass="col-sm-2 control-label">Firstname</form:label>
 	    		<form:input path="firstName" />
     			<form:errors path="firstName" cssClass="error" />
@@ -22,9 +22,15 @@
     		</div>
     		
     		<div class="form-group">
-    			<form:label path="birthDate" cssClass="col-sm-2 control-label">Birthdate</form:label>
-    			<form:input path="birthDate" placeholder="yyyy-MM-dd" />
-    			<form:errors path="birthDate" cssClass="error" />
+    			<form:label path="actor.id" cssClass="col-sm-2 control-label">Actor</form:label>
+	    		<form:select path="actor.id" items="${ actors }" itemValue="id" itemLabel="fullName" />
+	    		<form:errors path="actor.id" cssClass="error" />
+    		</div>
+    		
+    		<div class="form-group">
+    			<form:label path="movie.id" cssClass="col-sm-2 control-label">Movie</form:label>
+	    		<form:select path="movie.id" items="${ movies }" itemValue="id" itemLabel="title" />
+	    		<form:errors path="movie.id" cssClass="error" />
     		</div>
     		
     		<div class="form-group">
